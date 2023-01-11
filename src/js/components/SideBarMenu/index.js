@@ -5,52 +5,23 @@ import {
   FiUsers,
   FiGrid,
   FiPackage,
+  FiCalendar,
+  FiFileMinus,
 } from "react-icons/fi";
+import MenuItem from "./MenuItem";
 
 export default () => {
   return (
-    <div className="flex flex-col items-stretch space-y-3 p-3">
-      <div className="flex flex-row items-center space-x-3 rounded-2xl py-2 px-3 hover:bg-white group cursor-pointer">
-        <div className="p-2 text-white group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300">
-          <FiBell />
-        </div>
-        <div className="text-white font-bold group-hover:text-gray-800 hidden lg:block">
-          Notification
-        </div>
-      </div>
+    <div className="flex flex-col items-stretch space-y-3 m-3 overflow-hidden">
+      <MenuItem icon={<FiBell />} text="Notification" />
       <hr />
-      <div className="flex flex-row items-center space-x-3 rounded-2xl py-2 px-3 hover:bg-white group cursor-pointer">
-        <div className="p-2 text-white group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300">
-          <FiHardDrive />
-        </div>
-        <div className="text-white font-bold group-hover:text-gray-800 hidden lg:block">
-          Dashboard
-        </div>
-      </div>
-      <div className="flex flex-row items-center space-x-3 rounded-2xl py-2 px-3 hover:bg-white group cursor-pointer">
-        <div className="p-2 text-white group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300">
-          <FiUsers />
-        </div>
-        <div className="text-white font-bold group-hover:text-gray-800 hidden lg:block">
-          People
-        </div>
-      </div>
-      <div className="flex flex-row items-center space-x-3 rounded-2xl py-2 px-3 hover:bg-white group cursor-pointer">
-        <div className="p-2 text-white group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300">
-          <FiGrid />
-        </div>
-        <div className="text-white font-bold group-hover:text-gray-800 hidden lg:block">
-          Classes
-        </div>
-      </div>
-      <div className="flex flex-row items-center space-x-3 rounded-2xl py-2 px-3 hover:bg-white group cursor-pointer">
-        <div className="p-2 text-white group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300">
-          <FiPackage />
-        </div>
-        <div className="text-white font-bold group-hover:text-gray-800 hidden lg:block">
-          Products
-        </div>
-      </div>
+      <MenuItem icon={<FiHardDrive />} text="Dashboard" />
+      <MenuItem icon={<FiUsers />} text="Poeple" />
+      <MenuItem icon={<FiGrid />} text="Classes" />
+      <MenuItem icon={<FiPackage />} text="Products" />
+      <hr />
+      <MenuItem icon={<FiCalendar />} text="Calendar" />
+      <MenuItem icon={<FiFileMinus />} text="Report" />
     </div>
   );
 };

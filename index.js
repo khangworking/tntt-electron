@@ -3,7 +3,10 @@ const path = require("path");
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    backgroundColor: "white",
+    minWidth: 500,
+    frame: false,
+    titleBarStyle: "hidden",
+    resizable: false,
   });
   win.maximize();
   win.loadFile("./dist/index.html");
