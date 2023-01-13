@@ -13,15 +13,15 @@ import MenuItem from "./MenuItem";
 export default () => {
   return (
     <div className="flex flex-col items-stretch space-y-3 m-3 overflow-hidden">
-      <MenuItem icon={<FiBell />} text="Notification" />
+      <MenuItem icon={<FiBell />} text="Notifications" />
       <hr />
-      <MenuItem icon={<FiHardDrive />} text="Dashboard" />
-      <MenuItem icon={<FiUsers />} text="Poeple" />
+      <MenuItem icon={<FiHardDrive />} text="Dashboard" active={true} />
+      <MenuItem icon={<FiUsers />} text="Students" />
       <MenuItem icon={<FiGrid />} text="Classes" />
       <MenuItem icon={<FiPackage />} text="Products" />
       <hr />
       <MenuItem icon={<FiCalendar />} text="Calendar" />
-      <MenuItem icon={<FiFileMinus />} text="Report" />
+      <MenuItem icon={<FiFileMinus />} text="Reports" />
     </div>
   );
 };
