@@ -4,7 +4,7 @@ import SideBarMenu from "../components/SideBarMenu";
 import TopHeader from "../components/TopHeader";
 import { Outlet } from "react-router-dom";
 
-export default ({ children }) => {
+export default () => {
   return (
     <div className="flex flex-row items-stretch h-screen box-border space-x-4">
       <div className="flex flex-row items-stretch space-x-4 h-full box-border p-3 flex-auto">

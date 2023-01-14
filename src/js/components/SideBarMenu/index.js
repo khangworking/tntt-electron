@@ -8,20 +8,29 @@ import {
   FiCalendar,
   FiFileMinus,
 } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MenuItem from "./MenuItem";
 
 export default () => {
+  const { pathname } = useLocation();
   return (
     <div className="flex flex-col items-stretch space-y-3 m-3 overflow-hidden">
       <MenuItem icon={<FiBell />} text="Notifications" />
       <hr />
       <Link to="/">
-        <MenuItem icon={<FiHardDrive />} text="Dashboard" active={true} />
+        <MenuItem
+          icon={<FiHardDrive />}
+          text="Dashboard"
+          active={pathname === "/"}
+        />
       </Link>
 
       <Link to="/students">
-        <MenuItem icon={<FiUsers />} text="Students" />
+        <MenuItem
+          icon={<FiUsers />}
+          text="Students"
+          active={pathname === "/students"}
+        />
       </Link>
 
       <MenuItem icon={<FiGrid />} text="Classes" />
