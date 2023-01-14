@@ -8,6 +8,7 @@ import {
   FiCalendar,
   FiFileMinus,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import MenuItem from "./MenuItem";
 
 export default () => {
@@ -15,8 +16,14 @@ export default () => {
     <div className="flex flex-col items-stretch space-y-3 m-3 overflow-hidden">
       <MenuItem icon={<FiBell />} text="Notifications" />
       <hr />
-      <MenuItem icon={<FiHardDrive />} text="Dashboard" active={true} />
-      <MenuItem icon={<FiUsers />} text="Students" />
+      <Link to="/">
+        <MenuItem icon={<FiHardDrive />} text="Dashboard" active={true} />
+      </Link>
+
+      <Link to="/students">
+        <MenuItem icon={<FiUsers />} text="Students" />
+      </Link>
+
       <MenuItem icon={<FiGrid />} text="Classes" />
       <MenuItem icon={<FiPackage />} text="Products" />
       <hr />

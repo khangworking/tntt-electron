@@ -2,6 +2,7 @@ import React from "react";
 import RightSide from "../components/RightSide";
 import SideBarMenu from "../components/SideBarMenu";
 import TopHeader from "../components/TopHeader";
+import { Outlet } from "react-router-dom";
 
 export default ({ children }) => {
   return (
@@ -19,7 +20,9 @@ export default ({ children }) => {
           </div>
 
           {/* Main */}
-          <div className="flex-auto">{children}</div>
+          <div className="flex-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
 
