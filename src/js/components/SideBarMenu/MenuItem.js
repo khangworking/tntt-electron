@@ -8,8 +8,10 @@ export default ({ icon, text, active }) => {
       }`}
     >
       <div
-        className={`p-2 group-hover:text-gray-800 group-hover:scale-150 bg-indigo-400 rounded-lg group-hover:bg-transparent duration-300 ${
-          active ? "text-gray-800 scale-150 bg-transparent " : "text-white"
+        className={`p-2 group-hover:text-gray-800 group-hover:scale-150 rounded-lg group-hover:bg-transparent duration-300 ${
+          active
+            ? "text-gray-800 scale-150 bg-transparent"
+            : "text-white bg-indigo-400"
         }`}
       >
         {icon}
