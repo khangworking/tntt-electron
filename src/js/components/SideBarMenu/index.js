@@ -33,7 +33,13 @@ export default () => {
         />
       </Link>
 
-      <MenuItem icon={<FiGrid />} text="Classes" />
+      <Link to="/classes">
+        <MenuItem
+          icon={<FiGrid />}
+          text="Classes"
+          active={pathname === "/classes"}
+        />
+      </Link>
       <MenuItem icon={<FiPackage />} text="Products" />
       <hr />
       <MenuItem icon={<FiCalendar />} text="Calendar" />

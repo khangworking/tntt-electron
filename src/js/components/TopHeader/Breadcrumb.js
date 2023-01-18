@@ -6,8 +6,8 @@ export default () => {
   return (
     <div className="flex flex-col space-y-2 items-start text-gray-600">
       <ul>
-        <li className="">
-          <Link to="/">
+        <li>
+          <Link to="/" className="cursor-pointer">
             <FiHome />
           </Link>
         </li>

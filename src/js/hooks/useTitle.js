@@ -14,6 +14,9 @@ export default () => {
       case "/students":
         setTitle("Students");
         break;
+      case "/classes":
+        setTitle("Classes");
+        break;
     }
   }, [pathname]);
 
