@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { FiHome } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default () => {
   return (
-    <div className="flex flex-col space-y-2 items-start">
-      <div className="flex flex-row space-x-1 text-gray-400 items-center">
-        <FiHome />
-      </div>
+    <div className="flex flex-col space-y-2 items-start text-gray-600">
+      <ul>
+        <li className="">
+          <Link to="/">
+            <FiHome />
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
