@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Main from "../layouts/Main";
 import Dashboard from "./Dashboard";
 import Students from "./Students";
 import Classes from "./Classes";
+import Spinner from "./Spinner";
 const App = () => {
+  const [connected, setConnected] = useState(false);
   useEffect(() => {
-    window.versions.ping().then((rs) => console.log(rs));
-  });
+    window.electronAPI.onDatabaseConnected((_event) => {
+      setConnected(true);
+    });
+  }, []);
+  if (!connected) {
+    return <Spinner />;
+  }
   return (
     <HashRouter>
       <Routes>
