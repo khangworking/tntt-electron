@@ -6,7 +6,8 @@
   "scripts": {
     "app": "electron .",
     "watch": "webpack --config ./config/webpack/webpack.dev.js --watch",
-    "dev": "concurrently \"npm run watch\" \"npm run app\""
+    "dev": "concurrently \"npm run watch\" \"npm run app\"",
+    "knex": "knex"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +35,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "knex": "^2.4.1",
+    "objection": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
