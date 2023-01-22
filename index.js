@@ -1,13 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const LevelController = require("./controllers/levels");
 const sqlite3 = require("sqlite3").verbose();
-
-const connectDB = (win) => {
-  return new sqlite3.Database("./tntt.db", (err) => {
-    if (err) console.log(err);
-    else win.webContents.send("db:connected");
-  });
-};
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -19,12 +13,17 @@ const createWindow = () => {
     },
   });
   win.maximize();
-  win.loadFile("./dist/index.html").then(() => connectDB(win));
+  win.loadFile("./dist/index.html");
 };
 
 app.whenReady().then(() => {
-  ipcMain.handle("ping", () => "pong");
-  createWindow();
+  new sqlite3.Database("./tntt.db", (err) => {
+    if (err) console.log(err);
+    else createWindow();
+  });
+
+  ipcMain.handle("levels:all", LevelController.index);
+  ipcMain.handle("levels:find", LevelController.show);
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
