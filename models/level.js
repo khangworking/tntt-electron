@@ -22,6 +22,10 @@ class Level extends Model {
   static students() {
     return this.query().where("level_type", "student");
   }
+
+  static teachers() {
+    return this.query().where("level_type", "teacher");
+  }
 }
 
 module.exports = Level;

@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const LevelController = require("./controllers/levels");
+const Person = require("./models/person");
 const sqlite3 = require("sqlite3").verbose();
 
 const createWindow = () => {
@@ -24,6 +25,7 @@ app.whenReady().then(() => {
 
   ipcMain.handle("levels:all", LevelController.index);
   ipcMain.handle("levels:find", LevelController.show);
+  ipcMain.handle("people:teachers", () => Person.teachers());
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

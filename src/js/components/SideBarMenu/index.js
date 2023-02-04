@@ -15,12 +15,12 @@ export default () => {
   const { pathname } = useLocation();
   return (
     <div className="flex flex-col items-stretch space-y-3 m-3 overflow-hidden">
-      <MenuItem icon={<FiBell />} text="Notifications" />
+      <MenuItem icon={<FiBell />} text="Thông báo" />
       <hr />
       <Link to="/">
         <MenuItem
           icon={<FiHardDrive />}
-          text="Dashboard"
+          text="Tổng hợp"
           active={pathname === "/"}
         />
       </Link>
@@ -28,7 +28,7 @@ export default () => {
       <Link to="/students">
         <MenuItem
           icon={<FiUsers />}
-          text="Students"
+          text="Thiếu nhi"
           active={pathname === "/students"}
         />
       </Link>
@@ -36,14 +36,14 @@ export default () => {
       <Link to="/classes">
         <MenuItem
           icon={<FiGrid />}
-          text="Classes"
+          text="Lớp/Ngành"
           active={pathname === "/classes"}
         />
       </Link>
-      <MenuItem icon={<FiPackage />} text="Products" />
+      <MenuItem icon={<FiPackage />} text="Sản phẩm" />
       <hr />
-      <MenuItem icon={<FiCalendar />} text="Calendar" />
-      <MenuItem icon={<FiFileMinus />} text="Reports" />
+      <MenuItem icon={<FiCalendar />} text="Lịch" />
+      <MenuItem icon={<FiFileMinus />} text="Báo cáo" />
     </div>
   );
 };

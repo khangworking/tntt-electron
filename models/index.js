@@ -7,6 +7,8 @@ const knex = Knex(
 
 Model.knex(knex);
 
-knex.on("query", (payload) => console.log(payload.sql));
+knex.on("query", ({ sql, bindings, method, __knexQueryUid }) => {
+  console.log(`[${__knexQueryUid}][${method}] ${sql} [${bindings}]`);
+});
 
 module.exports = Model;

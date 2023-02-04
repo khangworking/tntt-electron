@@ -9,13 +9,13 @@ export default () => {
   useEffect(() => {
     switch (pathname) {
       case "/":
-        setTitle("Dashboard");
+        setTitle("Tổng hợp");
         break;
       case "/students":
-        setTitle("Students");
+        setTitle("Thiếu nhi");
         break;
       case "/classes":
-        setTitle("Classes");
+        setTitle("Lớp/Ngành");
         break;
     }
   }, [pathname]);

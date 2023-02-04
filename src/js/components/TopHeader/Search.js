@@ -10,7 +10,7 @@ export default () => {
       <input
         type="text"
         className="border-0 outline-none rounded-2xl bg-transparent px-2 py-1 text-gray-700 text-sm"
-        placeholder="Search"
+        placeholder="Tìm kiếm"
       />
     </div>
   );
