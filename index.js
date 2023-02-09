@@ -26,6 +26,7 @@ app.whenReady().then(() => {
   ipcMain.handle("levels:all", LevelController.index);
   ipcMain.handle("levels:find", LevelController.show);
   ipcMain.handle("people:teachers", () => Person.teachers());
+  ipcMain.handle("people:groupFeast", () => Person.groupByFeast());
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

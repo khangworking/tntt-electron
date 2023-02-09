@@ -4,7 +4,8 @@ import Group from "./Group";
 
 export default () => {
   const [groups, setGroups] = useState({});
-  useEffect(() => {
+  const [tab, setTab] = useState("levels");
+  const fetchTeachers = () => {
     window.database.teachers().then((rs) => {
       // sort the group's keys by level's sort order
       let groups = orderBy(
@@ -23,26 +24,46 @@ export default () => {
       );
       setGroups(groups);
     });
-  }, []);
+  };
+  const fetchFeasts = () => {
+    window.database.groupFeast().then((rs) => setGroups(rs));
+  };
+  const title = (key) => (tab === "levels" ? groups[key][0].level.name : key);
+  const itemKey = (key) =>
+    tab === "levels" ? `group-level-${key}` : `feast-${key}`;
+  useEffect(() => {
+    if (tab === "levels") fetchTeachers();
+    else fetchFeasts();
+  }, [tab]);
   return (
     <div className="flex flex-col h-full">
       <div className="flex-none flex flex-row bg-gray-300 rounded-3xl p-2">
-        <div className="flex-auto py-1 px-2 bg-indigo-500 text-white text-sm font-bold cursor-pointer rounded-2xl text-center">
+        <div
+          onClick={() => setTab("levels")}
+          className={`flex-auto py-1 px-2 text-sm font-bold cursor-pointer rounded-2xl text-center ${
+            tab === "levels"
+              ? "bg-indigo-500 text-white"
+              : "bg-transparent text-gray-700"
+          }`}
+        >
           BQT - GLV
         </div>
-        <div className="flex-auto py-1 px-2 bg-transparent text-gray-700 text-sm font-bold cursor-pointer rounded-2xl text-center">
+        <div
+          onClick={() => setTab("feasts")}
+          className={`flex-auto py-1 px-2 text-sm font-bold cursor-pointer rounded-2xl text-center ${
+            tab === "feasts"
+              ? "bg-indigo-500 text-white"
+              : "bg-transparent text-gray-700"
+          }`}
+        >
           Bổn mạng
         </div>
       </div>
 
       <div className="flex-auto mt-3 relative">
         <div className="flex flex-col space-y-3 absolute top-0 left-0 w-full h-full overflow-auto">
-          {map(Object.keys(groups), (level_id) => (
-            <Group
-              level={groups[level_id][0].level}
-              people={groups[level_id]}
-              key={`group-level-${level_id}`}
-            />
+          {map(Object.keys(groups), (key) => (
+            <Group title={title(key)} people={groups[key]} key={itemKey(key)} />
           ))}
         </div>
       </div>

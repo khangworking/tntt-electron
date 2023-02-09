@@ -13,4 +13,5 @@ contextBridge.exposeInMainWorld("database", {
   allLevels: () => ipcRenderer.invoke("levels:all"),
   findLevel: (id) => ipcRenderer.invoke("levels:find", id),
   teachers: () => ipcRenderer.invoke("people:teachers"),
+  groupFeast: () => ipcRenderer.invoke("people:groupFeast"),
 });

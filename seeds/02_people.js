@@ -11,6 +11,13 @@ exports.seed = async function (knex) {
   const data = [];
   const student_levels = await Level.students();
   const teacher_levels = await Level.teachers();
+  const feast_days = [
+    faker.date.between("2021-01-01", "2021-12-31"),
+    faker.date.between("2021-01-01", "2021-12-31"),
+    faker.date.between("2021-01-01", "2021-12-31"),
+    faker.date.between("2021-01-01", "2021-12-31"),
+    faker.date.between("2021-01-01", "2021-12-31"),
+  ];
   for (let index = 0; index < 100; index++) {
     faker.locale = "vi";
     let female = [true, false][Math.floor(Math.random() * 2)];
@@ -46,6 +53,7 @@ exports.seed = async function (knex) {
       locale: "en",
     });
     let level_ids = teacher_levels.map((lv) => lv.id);
+    let feast = feast_days[Math.floor(Math.random() * feast_days.length)];
     data.push({
       name,
       forename,
@@ -53,6 +61,8 @@ exports.seed = async function (knex) {
       female,
       active: [true, false][Math.floor(Math.random() * 2)],
       level_id: level_ids[Math.floor(Math.random() * teacher_levels.length)],
+      phone: "0123456789",
+      feast: feast,
       created_at: Date.now(),
       updated_at: Date.now(),
     });

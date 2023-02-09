@@ -1,5 +1,6 @@
 const Model = require("./");
 const Level = require("./Level");
+const { groupBy } = require("lodash");
 
 class Person extends Model {
   static get tableName() {
@@ -26,6 +27,19 @@ class Person extends Model {
       .where("active", 1)
       .whereIn("level.id", Level.teachers().select("id"))
       .orderBy("level.sort_order", "desc");
+  }
+
+  static async groupByFeast() {
+    let results = await this.query()
+      .withGraphJoined("level")
+      .where("active", 1)
+      .whereIn("level.id", Level.teachers().select("id"))
+      .orderBy("feast");
+    results = groupBy(results, (item) => {
+      const feast = new Date(item.feast);
+      return `${feast.getDate()}/${feast.getMonth() + 1}`;
+    });
+    return results;
   }
 }
 
