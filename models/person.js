@@ -29,6 +29,25 @@ class Person extends Model {
       .orderBy("level.sort_order", "desc");
   }
 
+  static students(filters = {}) {
+    const limit = filters.per || 25;
+    const offset = ((filters.page || 1) - 1) * limit;
+    return this.query()
+      .select([
+        "people.*",
+        this.raw(
+          "replace(people.name, rtrim(people.name, replace(people.name, ' ', '')), '') AS first_name"
+        ),
+      ])
+      .withGraphJoined("level")
+      .where("active", 1)
+      .whereIn("level.id", Level.students().select("id"))
+      .orderBy("level.sort_order", "asc")
+      .orderByRaw("first_name asc")
+      .limit(limit)
+      .offset(offset);
+  }
+
   static async groupByFeast() {
     let results = await this.query()
       .withGraphJoined("level")
