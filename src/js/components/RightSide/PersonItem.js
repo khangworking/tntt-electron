@@ -1,5 +1,5 @@
 import React from "react";
-import { SlUser, SlUserFemale } from "react-icons/sl";
+import { SlUser, SlUserFemale } from "react-icons/Sl";
 
 export default ({ person }) => {
   return (
