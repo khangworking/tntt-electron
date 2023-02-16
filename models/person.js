@@ -36,7 +36,7 @@ class Person extends Model {
       .select([
         "people.*",
         this.raw(
-          "replace(replace(people.name, rtrim(people.name, replace(people.name, ' ', '')), ''), 'Ð', 'D') AS first_name"
+          "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
         ),
       ])
       .withGraphJoined("level")

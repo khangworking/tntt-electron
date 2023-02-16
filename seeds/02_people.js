@@ -4,6 +4,7 @@
  */
 const { faker } = require("@faker-js/faker");
 const Level = require("../models/Level");
+const { toSlug } = require("../utils");
 
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
@@ -33,6 +34,7 @@ exports.seed = async function (knex) {
     let level_id = level_ids[Math.floor(Math.random() * student_levels.length)];
     data.push({
       name,
+      slug: toSlug(name),
       forename,
       birthday: faker.date.birthdate({ min: 5, max: 18, mode: "age" }),
       female,
