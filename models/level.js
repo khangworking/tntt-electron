@@ -1,4 +1,5 @@
 const Model = require("./");
+const LevelManager = require("./level_manager");
 
 class Level extends Model {
   static get tableName() {
@@ -14,6 +15,26 @@ class Level extends Model {
         join: {
           from: "levels.id",
           to: "people.level_id",
+        },
+      },
+      level_managers: {
+        relation: Model.HasManyRelation,
+        modelClass: LevelManager,
+        join: {
+          from: "levels.id",
+          to: "level_managers.level_id",
+        },
+      },
+      managers: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Person,
+        join: {
+          from: "levels.id",
+          through: {
+            from: "level_managers.level_id",
+            to: "level_managers.person_id",
+          },
+          to: "people.id",
         },
       },
     };

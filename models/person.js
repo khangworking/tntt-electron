@@ -29,6 +29,19 @@ class Person extends Model {
       .orderBy("level.sort_order", "desc");
   }
 
+  static managers() {
+    return this.query()
+      .withGraphJoined("level")
+      .where("active", 1)
+      .whereIn("level.name", [
+        "Dự Trưởng",
+        "Huynh Trưởng cấp 1",
+        "Huynh Trưởng cấp 2",
+        "Huynh Trưởng cấp 3",
+        "Trợ Uý",
+      ]);
+  }
+
   static students(filters = {}) {
     const limit = filters.per || 25;
     const offset = ((filters.page || 1) - 1) * limit;

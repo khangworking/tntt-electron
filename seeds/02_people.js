@@ -44,7 +44,7 @@ exports.seed = async function (knex) {
       updated_at: Date.now(),
     });
   }
-  for (let index = 0; index < 50; index++) {
+  for (let index = 0; index < 100; index++) {
     faker.locale = "vi";
     let female = [true, false][Math.floor(Math.random() * 2)];
     let gender = female ? "female" : "male";

@@ -25,3 +25,7 @@ exports.toSlug = (str) => {
   // return
   return str;
 };
+
+exports.getRandomArbitrary = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
