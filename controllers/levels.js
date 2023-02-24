@@ -14,7 +14,16 @@ module.exports = {
     return { levels };
   },
   show: async (_event, id) => {
-    const level = await Level.find(id);
+    const level = await Level.query()
+      .withGraphJoined("[managers.level,people]")
+      .select(
+        "levels.*",
+        Level.relatedQuery("people")
+          .where("people.active", 1)
+          .count()
+          .as("num_of_people")
+      )
+      .findById(id);
     return { level };
   },
 };

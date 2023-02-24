@@ -22,7 +22,7 @@ export default () => {
                 <th className="py-2 text-left px-4">Tên ngành</th>
                 <th>Sĩ số</th>
                 <th>GLV - HT</th>
-                <th>Xoá</th>
+                <th></th>
               </tr>
             </thead>
             <tbody className="bg-gray-50">

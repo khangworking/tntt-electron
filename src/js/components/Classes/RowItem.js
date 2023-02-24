@@ -1,11 +1,8 @@
 import React from "react";
-import { FiTrash } from "react-icons/fi";
+import { FiTrash, FiEye } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const RowItem = ({ level }) => {
-  const deleteLevel = () => {
-    if (!confirm("Bạn muốn xoá?")) return;
-    alert("deleted!");
-  };
   return (
     <tr className="hover:bg-gray-100">
       <td className="py-2 px-4">{level.name}</td>
@@ -18,11 +15,12 @@ const RowItem = ({ level }) => {
         ))}
       </td>
       <td className="py-2 px-4">
-        <div
-          className="cursor-pointer flex flex-row justify-center"
-          onClick={deleteLevel}
-        >
-          <FiTrash />
+        <div className="flex flex-row space-x-2 items-center justify-center">
+          <Link to={`/classes-detail?id=${level.id}`}>
+            <button className="cursor-pointer p-2 rounded-md border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white duration-150">
+              <FiEye />
+            </button>
+          </Link>
         </div>
       </td>
     </tr>
