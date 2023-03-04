@@ -61,6 +61,10 @@ class Person extends Model {
       .offset(offset);
   }
 
+  static student(id) {
+    return this.query().withGraphJoined("level").findById(id);
+  }
+
   static async groupByFeast() {
     let results = await this.query()
       .withGraphJoined("level")

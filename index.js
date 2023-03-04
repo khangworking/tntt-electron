@@ -30,6 +30,7 @@ app.whenReady().then(() => {
   ipcMain.handle("people:students", (_, filters = {}) =>
     Person.students(filters)
   );
+  ipcMain.handle("people:student", (_, id) => Person.student(id));
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

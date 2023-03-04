@@ -3,7 +3,8 @@ import { StudentActions } from "../constants";
 
 const initializeState = {
   students: [],
-  currentStudent: null,
+  currentStudentId: null,
+  currentStudent: {},
 };
 
 const reducer = (state, action) => {
@@ -13,10 +14,21 @@ const reducer = (state, action) => {
         ...state,
         students: action.payload,
       };
+    case StudentActions.setCurrentId:
+      return {
+        ...state,
+        currentStudentId: action.id,
+      };
     case StudentActions.setCurrent:
       return {
         ...state,
-        currentStudent: action.id,
+        currentStudent: action.payload,
+      };
+    case StudentActions.unsetCurrent:
+      return {
+        ...state,
+        currentStudent: {},
+        currentStudentId: null,
       };
     default:
       return state;

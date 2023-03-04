@@ -6,16 +6,25 @@ import RowItem from "./RowItem";
 
 const StudentsTable = () => {
   const [page, setPage] = useState(1);
+  const [term, setTerm] = useState("");
   const { state, dispatch } = useContext(StudentsContext);
 
   useEffect(() => {
     window.database.students({ page, per: 25 }).then((rs) => {
       dispatch({ type: StudentActions.fetchData, payload: rs });
     });
-  }, [page]);
+  }, [page, term]);
 
   return (
-    <div className="flex flex-col items-stretch relative h-full">
+    <div className="flex flex-col items-stretch relative h-full space-y-3">
+      <div className="flex flex-row flex-none justify-end space-x-3">
+        <button className="px-5 py-1 border rounded-md bg-indigo-400 text-white hover:ring-2 hover:ring-indigo-300 duration-200">
+          Tạo mới
+        </button>
+        <button className="px-5 py-1 border rounded-md hover:ring-2 hover:ring-indigo-300 duration-200">
+          Lọc
+        </button>
+      </div>
       <div className="flex-auto rounded-xl relative h-full overflow-auto">
         <table className="absolute top-0 left-0 w-full h-full ">
           <thead className="">
