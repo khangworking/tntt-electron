@@ -3,7 +3,7 @@ import { StudentActions } from "../../constants";
 import { StudentsContext } from "../../context/StudentsContext";
 import { GrClose } from "react-icons/gr";
 import { SlUserFemale, SlUser } from "react-icons/Sl";
-import { last } from "lodash";
+import { takeRight } from "lodash";
 import moment from "moment";
 
 const StudentSide = () => {
@@ -46,7 +46,7 @@ const StudentSide = () => {
           <div className="flex-auto">
             <div className="font-light">{student.forename}</div>
             <div className="font-bold text-2xl">
-              {last(student.name.split(" "))}
+              {takeRight(student.name.split(" "), 2).join(" ")}
             </div>
           </div>
         </div>
