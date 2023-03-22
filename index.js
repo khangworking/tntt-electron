@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const LevelController = require("./controllers/levels");
+const PeopleController = require("./controllers/people");
 const Person = require("./models/person");
 const sqlite3 = require("sqlite3").verbose();
 
@@ -31,6 +32,7 @@ app.whenReady().then(() => {
     Person.students(filters)
   );
   ipcMain.handle("people:student", (_, id) => Person.student(id));
+  ipcMain.handle("people:deactivate", PeopleController.delete);
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

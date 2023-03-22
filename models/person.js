@@ -7,6 +7,27 @@ class Person extends Model {
     return "people";
   }
 
+  static get jsonSchema() {
+    return {
+      type: "object",
+      required: ["name"],
+      properties: {
+        id: { type: "integer" },
+        name: { type: "string", minLength: 1, maxLength: 255 },
+        slug: { type: "string", minLength: 1, maxLength: 255 },
+        forename: { type: "string", minLength: 1, maxLength: 255 },
+        bithday: { type: "string" },
+        active: { type: "boolean", default: true },
+        feast: { type: "string" },
+        phone: { type: "string", pattern: "^[0-9]{10}$" },
+        level_id: { type: "integer" },
+        role: { type: "string", minLength: 100 },
+        created_at: { type: "string" },
+        updated_at: { type: "string" },
+      },
+    };
+  }
+
   static get relationMappings() {
     const Level = require("./level");
     return {
@@ -76,6 +97,15 @@ class Person extends Model {
       return `${feast.getDate()}/${feast.getMonth() + 1}`;
     });
     return results;
+  }
+
+  async deactivate() {
+    try {
+      await this.$query().patch({ active: false });
+      return [true, null];
+    } catch (error) {
+      return [false, error];
+    }
   }
 }
 

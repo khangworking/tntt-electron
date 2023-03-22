@@ -5,6 +5,7 @@ import { GrClose } from "react-icons/gr";
 import { SlUserFemale, SlUser } from "react-icons/Sl";
 import { takeRight } from "lodash";
 import moment from "moment";
+import DeactiveButton from "./DeactiveButton";
 
 const StudentSide = () => {
   const { state, dispatch } = useContext(StudentsContext);
@@ -12,7 +13,6 @@ const StudentSide = () => {
     if (!state.currentStudentId) return;
 
     window.database.student(state.currentStudentId).then((rs) => {
-      console.log(rs);
       dispatch({ type: StudentActions.setCurrent, payload: rs });
     });
   }, [state.currentStudentId]);
@@ -21,11 +21,15 @@ const StudentSide = () => {
     dispatch({ type: StudentActions.unsetCurrent });
   };
 
+  const onDeactiveSuccess = () => {
+    dispatch({ type: StudentActions.unsetCurrent });
+  };
+
   if (!!Object.keys(state.currentStudent).length) {
     const student = state.currentStudent;
     return (
       <div className="p-3 bg-gray-100 h-full box-border w-72 flex flex-col items-stretch space-y-2">
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end flex-none">
           <div
             className="rounded-full bg-white/75 p-3 cursor-pointer"
             onClick={handleClose}
@@ -33,7 +37,7 @@ const StudentSide = () => {
             <GrClose />
           </div>
         </div>
-        <div className="flex flex-row space-x-3 items-center">
+        <div className="flex flex-row space-x-3 items-center flex-none">
           <div className="flex-none">
             <div
               className={`rounded-full border-2 w-16 h-16 grid place-items-center text-3xl bg-white ${
@@ -50,7 +54,7 @@ const StudentSide = () => {
             </div>
           </div>
         </div>
-        <div className="pt-4 flex flex-col space-y-5">
+        <div className="pt-4 flex flex-col space-y-5 flex-auto">
           <div className="flex flex-col">
             <div className="font-thin text-sm">Họ và Tên</div>
             <div className="font-bold text-xl">{student.name}</div>
@@ -99,6 +103,15 @@ const StudentSide = () => {
             <div className="font-thin text-sm">Phụ huynh</div>
             <div className="font-bold text-xl">-</div>
           </div>
+        </div>
+        <div>
+          {/* <DeactiveButton
+            className="py-2 w-full border rounded-md border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-200"
+            id={state.currentStudentId}
+            onSuccess={onDeactiveSuccess}
+          >
+            Xoá
+          </DeactiveButton> */}
         </div>
       </div>
     );
