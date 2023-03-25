@@ -1,10 +1,15 @@
 const Model = require("./");
 const Level = require("./Level");
 const { groupBy } = require("lodash");
+const { toSlug } = require("../utils");
 
 class Person extends Model {
   static get tableName() {
     return "people";
+  }
+
+  async $beforeInsert() {
+    this.slug = toSlug(this.name);
   }
 
   static get jsonSchema() {
@@ -15,15 +20,15 @@ class Person extends Model {
         id: { type: "integer" },
         name: { type: "string", minLength: 1, maxLength: 255 },
         slug: { type: "string", minLength: 1, maxLength: 255 },
-        forename: { type: "string", minLength: 1, maxLength: 255 },
-        bithday: { type: "string" },
+        forename: { type: ["string", "null"], minLength: 1, maxLength: 255 },
+        bithday: { type: ["string", "null"] },
         active: { type: "boolean", default: true },
-        feast: { type: "string" },
-        phone: { type: "string", pattern: "^[0-9]{10}$" },
+        feast: { type: ["string", "null"], maxLength: 5 },
+        phone: { type: ["string", "null"], pattern: "^[0-9]{10}$" },
         level_id: { type: "integer" },
-        role: { type: "string", minLength: 100 },
-        created_at: { type: "string" },
-        updated_at: { type: "string" },
+        role: { type: ["string", "null"], minLength: 1, maxLength: 255 },
+        created_at: { type: ["string", "null"] },
+        updated_at: { type: ["string", "null"] },
       },
     };
   }

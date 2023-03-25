@@ -5,6 +5,7 @@ const initializeState = {
   students: [],
   currentStudentId: null,
   currentStudent: {},
+  createStudent: false,
 };
 
 const reducer = (state, action) => {
@@ -18,15 +19,25 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentStudentId: action.id,
+        createStudent: false,
       };
     case StudentActions.setCurrent:
       return {
         ...state,
         currentStudent: action.payload,
+        createStudent: false,
       };
     case StudentActions.unsetCurrent:
       return {
         ...state,
+        currentStudent: {},
+        currentStudentId: null,
+        createStudent: false,
+      };
+    case StudentActions.createStudent:
+      return {
+        ...state,
+        createStudent: true,
         currentStudent: {},
         currentStudentId: null,
       };

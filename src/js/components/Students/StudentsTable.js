@@ -15,10 +15,17 @@ const StudentsTable = () => {
     });
   }, [page, term]);
 
+  const handleCreateStudent = () => {
+    dispatch({ type: StudentActions.createStudent });
+  };
+
   return (
     <div className="flex flex-col items-stretch relative h-full space-y-3">
       <div className="flex flex-row flex-none justify-end space-x-3">
-        <button className="px-5 py-1 border rounded-md bg-indigo-400 text-white hover:ring-2 hover:ring-indigo-300 duration-200">
+        <button
+          onClick={handleCreateStudent}
+          className="px-5 py-1 border rounded-md bg-indigo-400 text-white hover:ring-2 hover:ring-indigo-300 duration-200"
+        >
           Tạo mới
         </button>
         <button className="px-5 py-1 border rounded-md hover:ring-2 hover:ring-indigo-300 duration-200">

@@ -3,4 +3,5 @@ export const StudentActions = {
   setCurrentId: "SET_CURRENT_STUDENT_ID",
   setCurrent: "SET_CURRENT_STUDENT",
   unsetCurrent: "UNSET_CURRENT",
+  createStudent: "CREATE_STUDENT",
 };

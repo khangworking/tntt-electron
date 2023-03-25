@@ -1,3 +1,4 @@
+const { ValidationError } = require("objection");
 const Person = require("../models/person");
 
 module.exports = {
@@ -7,5 +8,20 @@ module.exports = {
     if (success) return true;
     console.log(error);
     return false;
+  },
+  async create(_event, params) {
+    try {
+      const person = await Person.query().insert(params);
+      return { success: true, person };
+    } catch (error) {
+      let validation = false;
+      if (error instanceof ValidationError) {
+        console.error("Validation error:", error.message);
+        validation = true;
+      } else {
+        console.error("Insert error:", error.message);
+      }
+      return { success: false, error: error.message, validation };
+    }
   },
 };
