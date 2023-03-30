@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Fomik, { ErrorMessage, Field, Form, Formik } from "formik";
 import LevelSelector from "./LevelSelector";
 import { each, map, reduce } from "lodash";
+import FeastInput from "./FeastInput";
 
 const CreateForm = () => {
   const initialValues = {
@@ -11,6 +12,7 @@ const CreateForm = () => {
     role: "",
     level_id: "",
     female: false,
+    feast: "",
   };
 
   let [exception, setException] = useState("");
@@ -45,7 +47,7 @@ const CreateForm = () => {
   };
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ isSubmitting }) => (
+      {({ isSubmitting, handleChange, values }) => (
         <Form className="flex flex-col space-y-3">
           {!!exception && (
             <div className="w-full block py-1 px-2 bg-red-400 text-white">
@@ -158,6 +160,19 @@ const CreateForm = () => {
                 <div className="text-sm text-red-400">{msg}</div>
               )}
               name="level_id"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="feast"
+              className="mb-2 block font-bold text-sm text-gray-600"
+            >
+              Bổn mạng
+            </label>
+            <FeastInput
+              handleChange={handleChange}
+              value={values.feast}
+              className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
             />
           </div>
           <button
