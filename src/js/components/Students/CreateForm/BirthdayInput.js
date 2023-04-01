@@ -12,6 +12,7 @@ const BirthdayInput = ({ value, handleChange, ...props }) => {
       {() => (
         <ReactDatePicker
           {...props}
+          placeholderText="dd/MM/yyyy"
           selected={value}
           onChange={onChange}
           dateFormat="dd/MM/yyyy"
