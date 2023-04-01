@@ -3,6 +3,7 @@ import Fomik, { ErrorMessage, Field, Form, Formik } from "formik";
 import LevelSelector from "./LevelSelector";
 import { each, map, reduce } from "lodash";
 import FeastInput from "./FeastInput";
+import BirthdayInput from "./BirthdayInput";
 
 const CreateForm = () => {
   const initialValues = {
@@ -13,6 +14,7 @@ const CreateForm = () => {
     level_id: "",
     female: false,
     feast: "",
+    birthday: "",
   };
 
   let [exception, setException] = useState("");
@@ -47,7 +49,7 @@ const CreateForm = () => {
   };
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ isSubmitting, handleChange, values }) => (
+      {({ isSubmitting, handleChange, setFieldValue, values }) => (
         <Form className="flex flex-col space-y-3">
           {!!exception && (
             <div className="w-full block py-1 px-2 bg-red-400 text-white">
@@ -172,6 +174,19 @@ const CreateForm = () => {
             <FeastInput
               handleChange={handleChange}
               value={values.feast}
+              className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="feast"
+              className="mb-2 block font-bold text-sm text-gray-600"
+            >
+              Ngày sinh
+            </label>
+            <BirthdayInput
+              handleChange={setFieldValue}
+              value={values.birthday}
               className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
             />
           </div>

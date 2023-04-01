@@ -47,6 +47,12 @@ class Level extends Model {
   static teachers() {
     return this.query().where("level_type", "teacher");
   }
+
+  static optionsForSelector() {
+    return this.query()
+      .where("level_type", "student")
+      .orWhere("level_type", "teacher");
+  }
 }
 
 module.exports = Level;

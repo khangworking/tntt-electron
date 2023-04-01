@@ -19,4 +19,5 @@ contextBridge.exposeInMainWorld("database", {
   deactivateStudent: (id) => ipcRenderer.invoke("people:deactivate", id),
   createStudent: (params) => ipcRenderer.invoke("people:create", params),
   studentLevels: () => ipcRenderer.invoke("level:students"),
+  levelsForSelector: () => ipcRenderer.invoke("level:forSelector"),
 });

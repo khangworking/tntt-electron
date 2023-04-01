@@ -36,6 +36,7 @@ app.whenReady().then(() => {
   ipcMain.handle("people:deactivate", PeopleController.delete);
   ipcMain.handle("people:create", PeopleController.create);
   ipcMain.handle("level:students", () => Level.students());
+  ipcMain.handle("level:forSelector", () => Level.optionsForSelector());
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

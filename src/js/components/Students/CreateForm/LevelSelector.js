@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const LevelSelector = (props) => {
   const [levels, setLevels] = useState([]);
   useEffect(() => {
-    window.database.studentLevels().then((rs) => setLevels(rs));
+    window.database.levelsForSelector().then((rs) => setLevels(rs));
   }, []);
   return (
     <Field {...props}>
