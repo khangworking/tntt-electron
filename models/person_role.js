@@ -1,4 +1,4 @@
-import Model from "./";
+const Model = require("./");
 
 class PersonRole extends Model {
   static get tableName() {
@@ -22,6 +22,10 @@ class PersonRole extends Model {
       },
     };
   }
+
+  static search(term) {
+    return this.query().where("name", "like", `%${term}%`);
+  }
 }
 
-export default PersonRole;
+module.exports = PersonRole;

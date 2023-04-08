@@ -1,7 +1,8 @@
 const Model = require("./");
-const Level = require("./Level");
+const Level = require("./level");
 const { groupBy } = require("lodash");
 const { toSlug } = require("../utils");
+const PersonRole = require("./person_role");
 
 class Person extends Model {
   static get tableName() {
@@ -26,7 +27,7 @@ class Person extends Model {
         feast: { type: ["string", "null"], maxLength: 5 },
         phone: { type: ["string", "null"], pattern: "^[0-9]{10}$" },
         level_id: { type: "integer" },
-        role: { type: ["string", "null"], minLength: 1, maxLength: 255 },
+        role_id: { type: ["integer", "null"] },
         created_at: { type: ["string", "null"] },
         updated_at: { type: ["string", "null"] },
       },
@@ -34,7 +35,6 @@ class Person extends Model {
   }
 
   static get relationMappings() {
-    const Level = require("./level");
     return {
       level: {
         relation: Model.BelongsToOneRelation,
@@ -42,6 +42,14 @@ class Person extends Model {
         join: {
           from: "people.level_id",
           to: "levels.id",
+        },
+      },
+      role: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: PersonRole,
+        join: {
+          from: "people.role_id",
+          to: "person_roles.id",
         },
       },
     };
@@ -78,7 +86,7 @@ class Person extends Model {
           "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
         ),
       ])
-      .withGraphJoined("level")
+      .withGraphJoined("level", "role")
       .where("active", 1)
       .whereIn("level.id", Level.students().select("id"))
       .orderBy("level.sort_order", "asc")

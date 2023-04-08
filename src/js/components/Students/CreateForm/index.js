@@ -4,13 +4,15 @@ import LevelSelector from "./LevelSelector";
 import { each, map, reduce } from "lodash";
 import FeastInput from "./FeastInput";
 import BirthdayInput from "./BirthdayInput";
+import RoleInput from "./RoleInput";
 
 const CreateForm = () => {
   const initialValues = {
     forename: "",
     name: "",
     phone: "",
-    role: "",
+    role_id: "",
+    role: {},
     level_id: "",
     female: false,
     feast: "",
@@ -20,9 +22,14 @@ const CreateForm = () => {
   let [exception, setException] = useState("");
 
   const handleSubmit = async (values, actions) => {
+    console.log(values);
     const processValues = { ...values };
     each(Object.keys(processValues), (val) => {
-      if (processValues[val] === "" || processValues[val] === undefined)
+      if (
+        processValues[val] === "" ||
+        processValues[val] === undefined ||
+        !!Object.keys(processValues[val]).length
+      )
         delete processValues[val];
       if (val === "level_id" && !!processValues.level_id)
         processValues.level_id = parseInt(processValues.level_id);
@@ -123,26 +130,6 @@ const CreateForm = () => {
                 <div className="text-sm text-red-400">{msg}</div>
               )}
               name="phone"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="role"
-              className="mb-2 block font-bold text-sm text-gray-600"
-            >
-              Chức vụ
-            </label>
-            <Field
-              id="role"
-              name="role"
-              placeholder="Nhập chức vụ"
-              className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
-            />
-            <ErrorMessage
-              render={(msg) => (
-                <div className="text-sm text-red-400">{msg}</div>
-              )}
-              name="role"
             />
           </div>
           <div>

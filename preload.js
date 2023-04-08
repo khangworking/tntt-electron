@@ -20,4 +20,6 @@ contextBridge.exposeInMainWorld("database", {
   createStudent: (params) => ipcRenderer.invoke("people:create", params),
   studentLevels: () => ipcRenderer.invoke("level:students"),
   levelsForSelector: () => ipcRenderer.invoke("level:forSelector"),
+  personRolesSearching: (term) =>
+    ipcRenderer.invoke("person_roles:search", term),
 });
