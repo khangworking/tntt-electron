@@ -4,4 +4,6 @@ export const StudentActions = {
   setCurrent: "SET_CURRENT_STUDENT",
   unsetCurrent: "UNSET_CURRENT",
   createStudent: "CREATE_STUDENT",
+  filterStudents: "FILTER_STUDENTS",
+  updateFilter: "UPDATE_FILTER",
 };

@@ -3,36 +3,47 @@ import { StudentActions } from "../constants";
 
 const initializeState = {
   students: [],
+  total: 0,
   currentStudentId: null,
   currentStudent: {},
   createStudent: false,
+  filterStudents: false,
+  currentFilter: {
+    level_id: "",
+    gender: "",
+  },
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case StudentActions.fetchData:
+      console.log(action.payload);
       return {
         ...state,
-        students: action.payload,
+        students: action.payload.students,
+        total: action.payload.total,
       };
     case StudentActions.setCurrentId:
       return {
         ...state,
         currentStudentId: action.id,
         createStudent: false,
+        filterStudents: false,
       };
     case StudentActions.setCurrent:
       return {
         ...state,
         currentStudent: action.payload,
         createStudent: false,
+        filterStudents: false,
       };
     case StudentActions.unsetCurrent:
       return {
         ...state,
         currentStudent: {},
-        currentStudentId: null,
         createStudent: false,
+        filterStudents: false,
+        currentFilter: {},
       };
     case StudentActions.createStudent:
       return {
@@ -40,6 +51,20 @@ const reducer = (state, action) => {
         createStudent: true,
         currentStudent: {},
         currentStudentId: null,
+        filterStudents: false,
+      };
+    case StudentActions.filterStudents:
+      return {
+        ...state,
+        createStudent: false,
+        currentStudent: {},
+        currentStudentId: null,
+        filterStudents: true,
+      };
+    case StudentActions.updateFilter:
+      return {
+        ...state,
+        currentFilter: action.payload,
       };
     default:
       return state;

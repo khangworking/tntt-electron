@@ -4,7 +4,6 @@ import LevelSelector from "./LevelSelector";
 import { each, map, reduce } from "lodash";
 import FeastInput from "./FeastInput";
 import BirthdayInput from "./BirthdayInput";
-import RoleInput from "./RoleInput";
 
 const CreateForm = () => {
   const initialValues = {

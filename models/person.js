@@ -76,23 +76,33 @@ class Person extends Model {
       ]);
   }
 
-  static students(filters = {}) {
+  static async students(filters = {}) {
     const limit = filters.per || 25;
     const offset = ((filters.page || 1) - 1) * limit;
-    return this.query()
+    const theQuery = this.query()
+      .withGraphJoined("level", "role")
+      .where("active", 1)
+      .whereIn("level.id", Level.students().select("id"))
+      .orderBy("level.sort_order", "asc")
+      .orderByRaw("first_name asc");
+    let students = theQuery;
+    if (!!filters.level_id) {
+      students = students.where("level.id", filters.level_id);
+    }
+    if (!!filters.gender) {
+      students = students.where("female", filters.gender);
+    }
+    students = await students
       .select([
         "people.*",
         this.raw(
           "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
         ),
       ])
-      .withGraphJoined("level", "role")
-      .where("active", 1)
-      .whereIn("level.id", Level.students().select("id"))
-      .orderBy("level.sort_order", "asc")
-      .orderByRaw("first_name asc")
       .limit(limit)
       .offset(offset);
+    const total = await theQuery.count("*", { as: "count" });
+    return { students, total: !!total[0] && total[0]["count"] };
   }
 
   static student(id) {
