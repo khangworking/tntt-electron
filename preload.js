@@ -22,4 +22,5 @@ contextBridge.exposeInMainWorld("database", {
   levelsForSelector: () => ipcRenderer.invoke("level:forSelector"),
   personRolesSearching: (term) =>
     ipcRenderer.invoke("person_roles:search", term),
+  dashboard: () => ipcRenderer.invoke("dashboard"),
 });

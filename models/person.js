@@ -122,6 +122,22 @@ class Person extends Model {
     return results;
   }
 
+  static teachersCount() {
+    return this.query()
+      .where("active", 1)
+      .withGraphJoined("level")
+      .whereIn("level.id", Level.teachers().select("id"))
+      .count("people.id", { as: "count" });
+  }
+
+  static studentsCount() {
+    return this.query()
+      .where("active", 1)
+      .withGraphJoined("level")
+      .whereIn("level.id", Level.students().select("id"))
+      .count("people.id", { as: "count" });
+  }
+
   async deactivate() {
     try {
       await this.$query().patch({ active: false });

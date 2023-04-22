@@ -129,7 +129,6 @@ exports.seed = async function (knex) {
       name: "Tuyên Uý",
       created_at: Date.now(),
       updated_at: Date.now(),
-      level_type: "teacher",
       sort_order: 18,
     },
   ]);

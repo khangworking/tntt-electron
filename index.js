@@ -4,6 +4,7 @@ const LevelController = require("./controllers/levels");
 const PeopleController = require("./controllers/people");
 const Level = require("./models/level");
 const Person = require("./models/person");
+const DashboardController = require("./controllers/dashboard");
 const sqlite3 = require("sqlite3").verbose();
 
 const createWindow = () => {
@@ -23,6 +24,7 @@ app.whenReady().then(() => {
     else createWindow();
   });
 
+  ipcMain.handle("dashboard", DashboardController.show);
   ipcMain.handle("levels:all", LevelController.index);
   ipcMain.handle("levels:find", LevelController.show);
   ipcMain.handle("people:teachers", () => Person.teachers());
