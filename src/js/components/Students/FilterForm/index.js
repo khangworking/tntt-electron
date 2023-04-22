@@ -60,6 +60,9 @@ const FilterForm = () => {
           >
             Tìm kiếm
           </button>
+          <button className="bg-white text-gray-800 py-2 rounded-md disabled:bg-gray-400">
+            Xoá tìm kiếm
+          </button>
         </Form>
       )}
     </Formik>

@@ -13,9 +13,6 @@ export default () => {
         <div className="text-4xl font-bold text-gray-700">{title}</div>
       </div>
       <div className="flex-none">{/* <Search /> */}</div>
-      <div className="flex-none">
-        <img src={logo} className="w-8" />
-      </div>
     </div>
   );
 };

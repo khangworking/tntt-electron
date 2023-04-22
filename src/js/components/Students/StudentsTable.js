@@ -33,13 +33,13 @@ const StudentsTable = () => {
             onClick={handleCreateStudent}
             className="px-5 py-1 border rounded-md bg-indigo-400 text-white hover:ring-2 hover:ring-indigo-300 duration-200"
           >
-            Tạo mới
+            Thêm học viên
           </button>
           <button
             onClick={handleFilterStudents}
             className="px-5 py-1 border rounded-md hover:ring-2 hover:ring-indigo-300 duration-200"
           >
-            Lọc
+            Tìm kiếm
           </button>
         </div>
       </div>

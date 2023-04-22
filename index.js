@@ -9,8 +9,6 @@ const sqlite3 = require("sqlite3").verbose();
 const createWindow = () => {
   const win = new BrowserWindow({
     minWidth: 500,
-    frame: false,
-    titleBarStyle: "hidden",
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
     },

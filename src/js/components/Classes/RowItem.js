@@ -14,15 +14,6 @@ const RowItem = ({ level }) => {
           </div>
         ))}
       </td>
-      <td className="py-2 px-4">
-        <div className="flex flex-row space-x-2 items-center justify-center">
-          <Link to={`/classes-detail?id=${level.id}`}>
-            <button className="cursor-pointer p-2 rounded-md border border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white duration-150">
-              <FiEye />
-            </button>
-          </Link>
-        </div>
-      </td>
     </tr>
   );
 };
