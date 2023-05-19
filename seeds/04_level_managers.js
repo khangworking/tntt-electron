@@ -1,5 +1,5 @@
 const { each } = require("lodash");
-const Level = require("../models/Level");
+const Level = require("../models/level");
 const Person = require("../models/person");
 const { getRandomArbitrary } = require("../utils");
 
@@ -15,10 +15,17 @@ exports.seed = async function (knex) {
   let data = [];
 
   each(levels, (level) => {
-    const numOfPeople = getRandomArbitrary(1, 2);
+    const numOfPeople = getRandomArbitrary(1, 3);
     for (let i = 0; i < numOfPeople; i++) {
       let ps = people.pop();
-      data.push({ level_id: level.id, person_id: ps.id });
+      let role = i === 0 ? "teacher" : "supporter";
+      data.push({
+        level_id: level.id,
+        person_id: ps.id,
+        created_at: Date.now(),
+        updated_at: Date.now(),
+        role,
+      });
     }
   });
   await knex("level_managers").insert(data);
