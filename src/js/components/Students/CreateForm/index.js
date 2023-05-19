@@ -21,15 +21,16 @@ const CreateForm = () => {
   let [exception, setException] = useState("");
 
   const handleSubmit = async (values, actions) => {
-    console.log(values);
     const processValues = { ...values };
     each(Object.keys(processValues), (val) => {
       if (
         processValues[val] === "" ||
         processValues[val] === undefined ||
-        !!Object.keys(processValues[val]).length
-      )
+        (typeof processValues[val] === "object" &&
+          !Object.keys(processValues[val]).length)
+      ) {
         delete processValues[val];
+      }
       if (val === "level_id" && !!processValues.level_id)
         processValues.level_id = parseInt(processValues.level_id);
     });

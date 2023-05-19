@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "electron .",
+    "app": "electron . --dbpath='./tntt.db'",
     "watch": "webpack --config ./config/webpack/webpack.dev.js --watch",
     "dev": "concurrently \"npm run watch\" \"npm run app\"",
     "knex": "knex"

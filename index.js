@@ -18,15 +18,13 @@ const createWindow = () => {
   win.loadFile("./dist/index.html");
 };
 
-app.whenReady().then(() => {
-  new sqlite3.Database("./tntt.db", (err) => {
-    if (err) console.log(err);
-    else createWindow();
-  });
+app.whenReady().then(async () => {
+  createWindow();
 
   ipcMain.handle("dashboard", DashboardController.show);
   ipcMain.handle("levels:all", LevelController.index);
   ipcMain.handle("levels:find", LevelController.show);
+  ipcMain.handle("level:create", LevelController.create);
   ipcMain.handle("people:teachers", () => Person.teachers());
   ipcMain.handle("people:groupFeast", () => Person.groupByFeast());
   ipcMain.handle("people:students", (_, filters = {}) =>

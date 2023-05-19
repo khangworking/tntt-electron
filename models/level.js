@@ -6,6 +6,21 @@ class Level extends Model {
     return "levels";
   }
 
+  static get jsonSchema() {
+    return {
+      type: "object",
+      require: ["name"],
+      properties: {
+        id: { type: "integer" },
+        name: { type: "string", minLength: 1, maxLength: 255 },
+        level_type: { type: "string", minLength: 1, maxLength: 255 },
+        sort_order: { type: "integer" },
+        created_at: { type: ["string", "null"] },
+        updated_at: { type: ["string", "null"] },
+      },
+    };
+  }
+
   static get relationMappings() {
     const Person = require("./person");
     return {
