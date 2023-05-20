@@ -1,40 +1,25 @@
-import React, { useEffect, useState } from "react";
-import RowItem from "./RowItem";
+import React, { useState } from "react";
 import TopHeader from "../TopHeader";
+import LevelTable from "./LevelTable";
+import CreateForm from "./CreateForm";
 
 export default () => {
-  const [levels, setLevels] = useState([]);
+  const [key, setKey] = useState(Date.now());
 
-  useEffect(() => {
-    window.database.allLevels().then((payload) => {
-      console.log(payload);
-      const { levels } = payload;
-      setLevels(levels);
-    });
-  }, []);
+  const refresh = () => setKey(Date.now());
 
   return (
-    <div className="flex flex-col items-stretch h-full w-full p-3 space-y-2">
+    <div className="flex flex-col items-stretch h-full w-full py-3 pr-3 space-y-2">
       <div className="flex-none">
         <TopHeader />
       </div>
-      <div className="flex-auto rounded-xl relative h-full overflow-auto">
-        <table className="absolute top-0 left-0 w-full max-h-full ">
-          <thead className="">
-            <tr>
-              <th className="bg-gray-200 py-2 text-left px-4 sticky top-0">
-                Tên lớp
-              </th>
-              <th className="bg-gray-200 sticky top-0">Sĩ số</th>
-              <th className="bg-gray-200 sticky top-0">Trưởng phụ trách</th>
-            </tr>
-          </thead>
-          <tbody className="bg-gray-50">
-            {levels.map((level) => (
-              <RowItem key={`level-${level.id}`} level={level} />
-            ))}
-          </tbody>
-        </table>
+      <div className="flex-auto h-full flex flex-col space-y-3">
+        <div className="flex-none">
+          <CreateForm refresh={refresh} />
+        </div>
+        <div className="flex-auto relative overflow-auto rounded-xl">
+          <LevelTable key={key} />
+        </div>
       </div>
     </div>
   );

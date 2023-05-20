@@ -1,9 +1,10 @@
+const { ValidationError } = require("objection");
 const Level = require("../models/level");
 
 module.exports = {
   index: async () => {
     const levels = await Level.query()
-      .withGraphJoined("managers.level")
+      .withGraphJoined("level_managers.person.level")
       .select(
         "levels.*",
         Level.relatedQuery("people")
@@ -28,6 +29,7 @@ module.exports = {
   },
   create: async (_event, params) => {
     try {
+      console.log(params);
       const level = await Level.query().insert(params);
       return { success: true, level };
     } catch (error) {
