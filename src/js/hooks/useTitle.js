@@ -17,6 +17,9 @@ export default () => {
       case "/classes":
         setTitle("Lớp/Ngành");
         break;
+      case "/classes-detail":
+        setTitle("Thông tin lớp");
+        break;
     }
   }, [pathname]);
 

@@ -1,17 +1,30 @@
 import React, { useEffect } from "react";
 import { FiHome } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default () => {
+  const path = useLocation();
+
+  let address = null;
+  if (path.pathname === "/classes-detail") {
+    address = (
+      <li>
+        <span>&#187; </span>
+        <Link to="/classes" className="cursor-pointer">
+          Danh sách lớp
+        </Link>
+      </li>
+    );
+  }
+
   return (
-    <div className="flex flex-col space-y-2 items-start text-gray-600">
-      <ul>
-        <li>
-          <Link to="/" className="cursor-pointer">
-            <FiHome />
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <ul className="flex flex-row items-center space-x-1">
+      <li>
+        <Link to="/" className="cursor-pointer">
+          <FiHome />
+        </Link>
+      </li>
+      {address}
+    </ul>
   );
 };

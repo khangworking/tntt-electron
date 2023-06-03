@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const RowItem = ({ level }) => {
   const teachers = level.level_managers.filter((lm) => lm.role === "teacher");
@@ -7,7 +8,9 @@ const RowItem = ({ level }) => {
   );
   return (
     <tr className="hover:bg-gray-100">
-      <td className="py-2 px-4">{level.name}</td>
+      <td className="py-2 px-4">
+        <Link to={`/classes-detail#${level.id}`}>{level.name}</Link>
+      </td>
       <td className="py-2 px-4 text-center">{level.num_of_people}</td>
       <td className="py-2 px-4 text-center">
         {teachers.map((teacher) => (

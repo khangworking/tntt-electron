@@ -1,5 +1,6 @@
 const { ValidationError } = require("objection");
 const Level = require("../models/level");
+const Person = require("../models/person");
 
 module.exports = {
   index: async () => {
@@ -16,7 +17,7 @@ module.exports = {
   },
   show: async (_event, id) => {
     const level = await Level.query()
-      .withGraphJoined("[managers.level,people]")
+      .withGraphJoined("level_managers.person.level")
       .select(
         "levels.*",
         Level.relatedQuery("people")
@@ -25,7 +26,17 @@ module.exports = {
           .as("num_of_people")
       )
       .findById(id);
-    return { level };
+    const people = await Person.query()
+      .where("active", 1)
+      .where("level_id", level.id)
+      .select([
+        "people.*",
+        Person.raw(
+          "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
+        ),
+      ])
+      .orderByRaw("first_name asc");
+    return { level, people };
   },
   create: async (_event, params) => {
     try {

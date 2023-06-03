@@ -10,7 +10,11 @@ export default ({ level, people, title }) => {
       </div>
       <div className="flex flex-col space-y-3 items-stretch">
         {map(people, (person) => (
-          <PersonItem person={person} key={`glv-person-${person.id}`} />
+          <PersonItem
+            person={person}
+            key={`glv-person-${person.id}`}
+            backgroundClasses="bg-transparent hover:bg-gray-300"
+          />
         ))}
       </div>
     </div>
