@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 export default () => {
   const initialState = "";
   const [title, setTitle] = useState(initialState);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     switch (pathname) {
@@ -19,6 +19,10 @@ export default () => {
         break;
       case "/classes-detail":
         setTitle("Thông tin lớp");
+        const [, ...id] = hash;
+        window.database
+          .findLevel(id.join(""))
+          .then(({ level: { name } }) => setTitle(name));
         break;
     }
   }, [pathname]);
