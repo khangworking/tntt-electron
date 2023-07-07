@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import PersonItem from "../RightSide/PersonItem";
+import { LevelDetailContext } from "../../context/LevelDetailContext";
 
-const Students = ({ students }) => {
+const Students = () => {
+  const {
+    state: { students },
+  } = useContext(LevelDetailContext);
+
   return (
     <div className="grid grid-cols-5 gap-5">
       {students.map((student) => (

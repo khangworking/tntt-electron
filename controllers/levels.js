@@ -26,7 +26,7 @@ module.exports = {
           .as("num_of_people")
       )
       .findById(id);
-    const people = await Person.query()
+    const students = await Person.query()
       .where("active", 1)
       .where("level_id", level.id)
       .select([
@@ -36,7 +36,22 @@ module.exports = {
         ),
       ])
       .orderByRaw("first_name asc");
-    return { level, people };
+    const peopleForSelect = await Person.query()
+      .withGraphJoined("level")
+      .where("active", 1)
+      .where("level_type", "teacher")
+      .whereNotIn(
+        "people.id",
+        level.level_managers.map((lm) => lm.person_id)
+      )
+      .select([
+        "people.*",
+        Person.raw(
+          "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
+        ),
+      ])
+      .orderByRaw("first_name asc");
+    return { level, students, peopleForSelect };
   },
   create: async (_event, params) => {
     try {

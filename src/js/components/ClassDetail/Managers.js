@@ -1,30 +1,33 @@
-import React, { useEffect } from "react";
-import PersonItem from "../RightSide/PersonItem";
+import React, { useContext } from "react";
+import CreateManager from "./CreateManager";
+import { LevelDetailContext } from "../../context/LevelDetailContext";
+import { PiUserSwitchDuotone } from "react-icons/pi";
+import ManagerItem from "./ManagerItem";
 
-const Managers = ({ level_managers }) => {
+const Managers = () => {
+  const {
+    state: { managers: levelManagers, managersDropDown: peopleForSelect },
+  } = useContext(LevelDetailContext);
+
+  const managerItems = levelManagers.map((levelManager) => (
+    <ManagerItem
+      key={`level-manager-${levelManager.id}`}
+      levelManager={levelManager}
+    />
+  ));
+
   return (
-    <div className="flex flex-row space-x-3 items-stretch">
-      {level_managers.map((level_manager) => (
-        <PersonItem
-          key={level_manager.id}
-          person={level_manager.person}
-          borderClasses={
-            level_manager.role === "teacher"
-              ? "border border-red-300"
-              : "border border-gray-300"
-          }
-          backgroundClasses={
-            level_manager.role === "teacher"
-              ? "bg-red-100 hover:bg-red-300"
-              : "bg-gray-100 hover:bg-gray-300"
-          }
-          widthClass="w-60"
-          size="lg"
-          subtitle={
-            level_manager.role === "teacher" ? "Giảng viên" : "Trợ giảng"
-          }
-        />
-      ))}
+    <div className="flex flex-row items-stretch space-x-2">
+      <div className="flex-auto relative h-[82px]">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="flex flex-row space-x-3 items-stretch overflow-auto">
+            {managerItems}
+          </div>
+        </div>
+      </div>
+      <div className="flex-none">
+        <CreateManager />
+      </div>
     </div>
   );
 };

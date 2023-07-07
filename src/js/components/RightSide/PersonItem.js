@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Children } from "react";
 import { SlUser, SlUserFemale } from "react-icons/Sl";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default ({
   person,
@@ -9,10 +10,11 @@ export default ({
   heightClass = "",
   size = "",
   subtitle = "",
+  onClick = null,
+  disabled = false,
+  sideActions = [],
 }) => {
-  let wrapperClass = [
-    `flex flex-row items-center space-x-2 p-2 rounded-2xl duration-200 cursor-pointer`,
-  ];
+  let wrapperClass = [`flex flex-row rounded-2xl duration-200 overflow-hidden`];
   if (!!borderClasses) {
     wrapperClass.push(borderClasses);
   }
@@ -22,12 +24,21 @@ export default ({
   if (!!heightClass) {
     wrapperClass.push(heightClass);
   }
-  if (!!backgroundClasses) {
-    wrapperClass.push(backgroundClasses);
+
+  if (disabled) {
+    wrapperClass.push("relative cursor-not-allowed");
+  } else {
+    wrapperClass.push("cursor-pointer");
   }
   wrapperClass = wrapperClass.join(" ");
 
-  let iconClasses = ["rounded-xl bg-white grid place-items-center"];
+  let personClass = ["flex-auto flex flex-row items-center space-x-2 p-2"];
+  if (!!backgroundClasses) {
+    personClass.push(backgroundClasses);
+  }
+  personClass = personClass.join(" ");
+
+  let iconClasses = ["rounded-xl bg-white grid place-items-center flex-none"];
   let primaryTextClasses = ["font-bold whitespace-nowrap"];
   switch (size) {
     case "lg":
@@ -45,24 +56,52 @@ export default ({
   iconClasses = iconClasses.join(" ");
   primaryTextClasses = primaryTextClasses.join(" ");
 
+  const onPersonClicked = (e) => {
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
+    if (!!onClick) onClick();
+  };
+
   return (
     <div className={wrapperClass}>
-      <div className={iconClasses}>
-        {person.female ? (
-          <SlUserFemale className="text-red-300" />
-        ) : (
-          <SlUser className="text-blue-300" />
-        )}
+      {disabled && (
+        <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 bg-white"></div>
+      )}
+      <div onClick={onPersonClicked} className={personClass}>
+        <div className={iconClasses}>
+          {person.female ? (
+            <SlUserFemale className="text-red-300" />
+          ) : (
+            <SlUser className="text-blue-300" />
+          )}
+        </div>
+        <div className="flex flex-col flex-auto">
+          {!!subtitle && (
+            <div className="text-xs text-gray-500">{subtitle}</div>
+          )}
+          <div className={primaryTextClasses}>{person.name}</div>
+          {person.phone && (
+            <div className="text-xs text-gray-500 font-bold">
+              SĐT: {person.phone}
+            </div>
+          )}
+        </div>
       </div>
-      <div className="flex flex-col">
-        {!!subtitle && <div className="text-xs text-gray-500">{subtitle}</div>}
-        <div className={primaryTextClasses}>{person.name}</div>
-        {person.phone && (
-          <div className="text-xs text-gray-500 font-bold">
-            SĐT: {person.phone}
-          </div>
-        )}
-      </div>
+      {!!sideActions.length && (
+        <div className="flex flex-col items-stretch space-y-[1px] bg-gray-200">
+          {sideActions.map((action, i) => (
+            <div
+              onClick={action.callback}
+              className="flex-auto bg-white grid place-items-center px-2 hover:bg-gray-200 duration-150"
+              key={`person-item-side-action-${i}`}
+            >
+              {action.icon}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

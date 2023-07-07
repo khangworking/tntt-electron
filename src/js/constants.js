@@ -7,3 +7,11 @@ export const StudentActions = {
   filterStudents: "FILTER_STUDENTS",
   updateFilter: "UPDATE_FILTER",
 };
+
+export const LevelDetailActions = {
+  fetchData: "FETCH_DATA",
+  addManager: "ADD_MANAGER",
+  persistManager: "PERSIST_MANAGER",
+  changeRole: "CHANGE_ROLE",
+  removeManager: "REMOVE_MANAGER",
+};

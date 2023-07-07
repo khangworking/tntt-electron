@@ -5,6 +5,7 @@ const PeopleController = require("./controllers/people");
 const Level = require("./models/level");
 const Person = require("./models/person");
 const DashboardController = require("./controllers/dashboard");
+const LevelManagerController = require("./controllers/level_manager");
 const sqlite3 = require("sqlite3").verbose();
 
 const createWindow = () => {
@@ -36,6 +37,9 @@ app.whenReady().then(async () => {
   ipcMain.handle("level:students", () => Level.students());
   ipcMain.handle("level:forSelector", () => Level.optionsForSelector());
   ipcMain.handle("person_roles:search", (_, term) => PersonRole.search(term));
+  ipcMain.handle("managers:create", LevelManagerController.create);
+  ipcMain.handle("managers:switch", LevelManagerController.switch);
+  ipcMain.handle("managers:remove", LevelManagerController.remove);
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

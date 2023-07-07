@@ -24,4 +24,7 @@ contextBridge.exposeInMainWorld("database", {
     ipcRenderer.invoke("person_roles:search", term),
   dashboard: () => ipcRenderer.invoke("dashboard"),
   createLevel: (params) => ipcRenderer.invoke("level:create", params),
+  createManager: (params) => ipcRenderer.invoke("managers:create", params),
+  switchManager: (params) => ipcRenderer.invoke("managers:switch", params),
+  removeManager: (id) => ipcRenderer.invoke("managers:remove", id),
 });

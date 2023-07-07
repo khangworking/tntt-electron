@@ -17,7 +17,6 @@ const initializeState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case StudentActions.fetchData:
-      console.log(action.payload);
       return {
         ...state,
         students: action.payload.students,
