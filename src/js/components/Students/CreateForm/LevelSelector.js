@@ -1,10 +1,14 @@
 import { Field } from "formik";
 import React, { useEffect, useState } from "react";
 
-const LevelSelector = (props) => {
+const LevelSelector = ({ isTeacher, ...props }) => {
   const [levels, setLevels] = useState([]);
   useEffect(() => {
-    window.database.studentLevels().then((rs) => setLevels(rs));
+    if (isTeacher) {
+      window.database.teacherLevels().then((rs) => setLevels(rs));
+    } else {
+      window.database.studentLevels().then((rs) => setLevels(rs));
+    }
   }, []);
   return (
     <Field {...props}>

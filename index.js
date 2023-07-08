@@ -35,6 +35,7 @@ app.whenReady().then(async () => {
   ipcMain.handle("people:deactivate", PeopleController.delete);
   ipcMain.handle("people:create", PeopleController.create);
   ipcMain.handle("level:students", () => Level.students());
+  ipcMain.handle("level:teachers", () => Level.teachers());
   ipcMain.handle("level:forSelector", () => Level.optionsForSelector());
   ipcMain.handle("person_roles:search", (_, term) => PersonRole.search(term));
   ipcMain.handle("managers:create", LevelManagerController.create);

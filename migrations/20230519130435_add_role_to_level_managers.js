@@ -13,7 +13,7 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.table("level_manages", (table) => {
+  return knex.schema.table("level_managers", (table) => {
     table.dropColumn("role");
   });
 };

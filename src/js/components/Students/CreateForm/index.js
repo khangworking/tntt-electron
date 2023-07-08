@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Fomik, { ErrorMessage, Field, Form, Formik } from "formik";
 import LevelSelector from "./LevelSelector";
 import { each, map, reduce } from "lodash";
-import FeastInput from "./FeastInput";
 import BirthdayInput from "./BirthdayInput";
+import Cleave from "cleave.js/react";
 
 const CreateForm = () => {
   const initialValues = {
@@ -158,10 +158,16 @@ const CreateForm = () => {
             >
               Bổn mạng
             </label>
-            <FeastInput
-              handleChange={handleChange}
+            <Cleave
+              name="feast"
               value={values.feast}
+              placeholder="DD/MM"
+              options={{
+                date: true,
+                datePattern: ["d", "m"],
+              }}
               className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
+              onChange={handleChange}
             />
           </div>
           <div>
