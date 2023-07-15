@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { groupBy, map, orderBy, reduce, toPairs } from "lodash";
 import Group from "./Group";
-import CreateForm from "./CreateForm";
 
 export default () => {
   const [groups, setGroups] = useState({});
@@ -62,11 +61,6 @@ export default () => {
       </div>
 
       <div className="flex-auto mt-3 flex flex-col space-y-3">
-        {tab === "levels" && (
-          <div className="flex-none">
-            <CreateForm onSuccess={fetchTeachers} />
-          </div>
-        )}
         <div className="relative flex-auto">
           <div className="flex flex-col space-y-3 absolute top-0 left-0 w-full h-full overflow-auto">
             {map(Object.keys(groups), (key) => (
