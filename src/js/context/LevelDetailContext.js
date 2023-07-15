@@ -39,6 +39,7 @@ const reducer = (state, action) => {
           if (item.person_id === action.payload.person_id) {
             return {
               ...item,
+              ...action.payload,
               disabled: false,
             };
           }

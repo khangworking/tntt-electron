@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  FiBell,
-  FiHardDrive,
-  FiUsers,
-  FiGrid,
-  FiPackage,
-  FiCalendar,
-  FiFileMinus,
-} from "react-icons/fi";
+import { FiHardDrive, FiUsers, FiGrid } from "react-icons/fi";
+import { ImUsers } from "react-icons/im";
 import { Link, useLocation } from "react-router-dom";
 import MenuItem from "./MenuItem";
 
@@ -38,6 +31,14 @@ export default () => {
           icon={<FiGrid />}
           text="Lớp/Ngành"
           active={pathname === "/classes"}
+        />
+      </Link>
+      <hr />
+      <Link to="/staffs">
+        <MenuItem
+          icon={<ImUsers />}
+          text="Nhân sự"
+          active={pathname === "/staffs"}
         />
       </Link>
       {/* <MenuItem icon={<FiPackage />} text="Sản phẩm" />

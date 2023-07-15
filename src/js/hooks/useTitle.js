@@ -24,6 +24,9 @@ export default () => {
           .findLevel(id.join(""))
           .then(({ level: { name } }) => setTitle(name));
         break;
+      case "/staffs":
+        setTitle("Nhân sự");
+        break;
     }
   }, [pathname]);
 

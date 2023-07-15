@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import Students from "./Students";
 import Classes from "./Classes";
 import ClassDetail from "./ClassDetail";
+import StaffsIndex from "./Staffs";
 const App = () => {
   return (
     <HashRouter>
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/students" element={<Students />} />
           <Route path="/classes" element={<Classes />} />
           <Route path="/classes-detail" element={<ClassDetail />} />
+          <Route path="/staffs" element={<StaffsIndex />} />
         </Route>
       </Routes>
     </HashRouter>
