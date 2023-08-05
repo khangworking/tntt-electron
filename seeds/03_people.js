@@ -4,8 +4,8 @@
  */
 const { faker } = require("@faker-js/faker");
 const { filter } = require("lodash");
-const Level = require("../models/Level");
-const { toSlug, getRandomArbitrary, shuffleArray } = require("../utils");
+const { toSlug, shuffleArray } = require("../utils");
+const Level = require("../models/level");
 
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
@@ -67,7 +67,8 @@ exports.seed = async function (knex) {
       active: [true, false][Math.floor(Math.random() * 2)],
       level_id: level_ids[Math.floor(Math.random() * teacher_levels.length)],
       phone: "0123456789",
-      feast: feast,
+      feast,
+      slug: toSlug(name),
       created_at: Date.now(),
       updated_at: Date.now(),
     });

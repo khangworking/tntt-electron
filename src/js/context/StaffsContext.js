@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from "react";
+import { StaffsActions } from "../constants";
 
 const initializeState = {
   people: [],
@@ -7,6 +8,11 @@ const initializeState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case StaffsActions.fetchData:
+      return {
+        ...state,
+        people: action.payload,
+      };
     default:
       return state;
   }

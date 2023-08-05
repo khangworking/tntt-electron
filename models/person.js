@@ -105,6 +105,41 @@ class Person extends Model {
     return { students, total: !!total[0] && total[0]["count"] };
   }
 
+  static async findAll({
+    per = 25,
+    page = 1,
+    levelIds = [],
+    term = "",
+    active = 1,
+    id = null,
+  } = {}) {
+    const limit = per || 25;
+    const offset = ((page || 1) - 1) * limit;
+    let people = this.query().where("active", active);
+    if (!!levelIds.length) {
+      people = people
+        .withGraphJoined("level", "role")
+        .whereIn("level.id", levelIds);
+    }
+    if (!!term.length) {
+      people = people.whereRaw("people.name LIKE ?", [`%${term}%`]);
+    }
+    if (!!id) {
+      people = people.where("id", id);
+    }
+    people = await people
+      .select([
+        "people.*",
+        this.raw(
+          "replace(people.slug, rtrim(people.slug, replace(people.slug, '-', '')), '') AS first_name"
+        ),
+      ])
+      .orderByRaw("first_name asc")
+      .limit(limit)
+      .offset(offset);
+    return people;
+  }
+
   static student(id) {
     return this.query().withGraphJoined("level").findById(id);
   }

@@ -139,11 +139,7 @@ const CreateForm = () => {
             >
               Lớp/Ngành
             </label>
-            <LevelSelector
-              name="level_id"
-              as="select"
-              className="w-full block py-1 px-2 border border-gray-400 outline-none duration-150 rounded-md focus:ring-1 focus:ring-indigo-600"
-            />
+            <LevelSelector blank="Chọn lớp" />
             <ErrorMessage
               render={(msg) => (
                 <div className="text-sm text-red-400">{msg}</div>

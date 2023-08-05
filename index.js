@@ -26,6 +26,9 @@ app.whenReady().then(async () => {
   ipcMain.handle("levels:all", LevelController.index);
   ipcMain.handle("levels:find", LevelController.show);
   ipcMain.handle("level:create", LevelController.create);
+  ipcMain.handle("people:findAll", (_, filters = {}) =>
+    Person.findAll(filters)
+  );
   ipcMain.handle("people:teachers", () => Person.teachers());
   ipcMain.handle("people:groupFeast", () => Person.groupByFeast());
   ipcMain.handle("people:students", (_, filters = {}) =>
@@ -34,6 +37,7 @@ app.whenReady().then(async () => {
   ipcMain.handle("people:student", (_, id) => Person.student(id));
   ipcMain.handle("people:deactivate", PeopleController.delete);
   ipcMain.handle("people:create", PeopleController.create);
+  ipcMain.handle("people:update", PeopleController.update);
   ipcMain.handle("level:students", () => Level.students());
   ipcMain.handle("level:teachers", () => Level.teachers());
   ipcMain.handle("level:forSelector", () => Level.optionsForSelector());

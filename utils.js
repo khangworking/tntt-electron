@@ -1,14 +1,17 @@
+const { each } = require("lodash");
+
 exports.toSlug = (str) => {
   // Chuyển hết sang chữ thường
   str = str.toLowerCase();
+
+  // Thay ký tự đĐ
+  str = str.replace(/[đĐ]/g, "d");
+  str = str.replace(/[đăĐă]/g, "da");
 
   // xóa dấu
   str = str
     .normalize("NFD") // chuyển chuỗi sang unicode tổ hợp
     .replace(/[\u0300-\u036f]/g, ""); // xóa các ký tự dấu sau khi tách tổ hợp
-
-  // Thay ký tự đĐ
-  str = str.replace(/[đĐ]/g, "d");
 
   // Xóa ký tự đặc biệt
   str = str.replace(/([^0-9a-z-\s])/g, "");
@@ -36,4 +39,21 @@ exports.shuffleArray = (array) => {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+};
+
+exports.processStudentFormValues = (values) => {
+  const processValues = { ...values };
+  each(Object.keys(processValues), (val) => {
+    if (
+      processValues[val] === "" ||
+      processValues[val] === undefined ||
+      (typeof processValues[val] === "object" &&
+        !Object.keys(processValues[val]).length)
+    ) {
+      delete processValues[val];
+    }
+    if (val === "level_id" && !!processValues.level_id)
+      processValues.level_id = parseInt(processValues.level_id);
+  });
+  return processValues;
 };

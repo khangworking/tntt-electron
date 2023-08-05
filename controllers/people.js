@@ -24,4 +24,19 @@ module.exports = {
       return { success: false, error: error.message, validation };
     }
   },
+  async update(_event, { id, params }) {
+    try {
+      const person = await Person.query().patch(params).where("id", id);
+      return { success: true, person };
+    } catch (error) {
+      let validation = false;
+      if (error instanceof ValidationError) {
+        console.error("Validation error:", error.message);
+        validation = true;
+      } else {
+        console.error("Insert error:", error.message);
+      }
+      return { success: false, error: error.message, validation };
+    }
+  },
 };

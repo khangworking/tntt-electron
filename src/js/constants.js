@@ -15,3 +15,7 @@ export const LevelDetailActions = {
   changeRole: "CHANGE_ROLE",
   removeManager: "REMOVE_MANAGER",
 };
+
+export const StaffsActions = {
+  fetchData: "FETCH_DATA",
+};
