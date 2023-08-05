@@ -6,7 +6,6 @@ const Level = require("./models/level");
 const Person = require("./models/person");
 const DashboardController = require("./controllers/dashboard");
 const LevelManagerController = require("./controllers/level_manager");
-const sqlite3 = require("sqlite3").verbose();
 
 const createWindow = () => {
   const win = new BrowserWindow({

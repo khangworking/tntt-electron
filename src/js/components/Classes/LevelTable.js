@@ -14,6 +14,9 @@ const LevelTable = () => {
     <table className="absolute top-0 left-0 w-full max-h-full ">
       <thead className="">
         <tr>
+          <th className="bg-gray-200 py-2 text-center px-4 sticky top-0">
+            Thứ tự
+          </th>
           <th className="bg-gray-200 py-2 text-left px-4 sticky top-0">
             Lớp/Ngành
           </th>

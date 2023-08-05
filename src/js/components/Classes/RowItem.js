@@ -8,8 +8,12 @@ const RowItem = ({ level }) => {
   );
   return (
     <tr className="hover:bg-gray-100">
+      <td className="py-2 px-4 text-center">{level.sort_order}</td>
       <td className="py-2 px-4">
-        <Link to={`/classes-detail#${level.id}`}>{level.name}</Link>
+        {level.level_type === "student" && (
+          <Link to={`/classes-detail#${level.id}`}>{level.name}</Link>
+        )}
+        {level.level_type !== "student" && level.name}
       </td>
       <td className="py-2 px-4 text-center">{level.num_of_people}</td>
       <td className="py-2 px-4 text-center">
