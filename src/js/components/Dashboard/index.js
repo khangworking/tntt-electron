@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RightSide from "../RightSide";
 import TopHeader from "../TopHeader";
-import { BsArrowRight } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import CountPanel from "./CountPanel";
 
 export default () => {
