@@ -1,8 +1,9 @@
 const Model = require("./");
 const Level = require("./level");
 const { groupBy } = require("lodash");
-const { toSlug } = require("../utils");
+const { toSlug, convertFeastToDate } = require("../utils");
 const PersonRole = require("./person_role");
+const moment = require("moment");
 
 class Person extends Model {
   static get tableName() {
@@ -145,15 +146,17 @@ class Person extends Model {
   }
 
   static async groupByFeast() {
-    let results = await this.query()
+    let rawData = await this.query()
       .withGraphJoined("level")
       .where("active", 1)
-      .whereIn("level.id", Level.teachers().select("id"))
-      .orderBy("feast");
-    results = groupBy(results, (item) => {
-      const feast = new Date(item.feast);
-      return `${feast.getDate()}/${feast.getMonth() + 1}`;
-    });
+      .whereIn("level.id", Level.teachers().select("id"));
+    rawData = groupBy(rawData, (item) => item.feast);
+    const results = Object.keys(rawData)
+      .sort((a, b) => convertFeastToDate(a) - convertFeastToDate(b))
+      .reduce((acc, item) => {
+        acc[item] = rawData[item];
+        return acc;
+      }, {});
     return results;
   }
 

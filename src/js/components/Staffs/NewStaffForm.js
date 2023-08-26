@@ -14,8 +14,11 @@ const initState = {
   phone: "",
 };
 
+let addedTimeout = null;
+
 const NewStaffForm = () => {
   const [exception, setException] = useState(null);
+  const [added, setAdded] = useState(false);
   const handleSubmit = (values, actions) => {
     const params = processStudentFormValues(values);
     if (!params.forename) {
@@ -43,6 +46,9 @@ const NewStaffForm = () => {
       .createPeople(params)
       .then(({ success, error, validation }) => {
         if (success) {
+          setAdded(true);
+          clearTimeout(addedTimeout);
+          addedTimeout = setTimeout(() => setAdded(false), 1000);
           actions.resetForm();
         } else if (validation) {
           let errors = reduce(
@@ -159,6 +165,11 @@ const NewStaffForm = () => {
           >
             Hoàn tất
           </button>
+          {added && (
+            <div className="bg-green-400 text-white rounded-md py-1 px-2 text-center">
+              Đã thêm
+            </div>
+          )}
         </Form>
       )}
     </Formik>

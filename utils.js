@@ -57,3 +57,8 @@ exports.processStudentFormValues = (values) => {
   });
   return processValues;
 };
+
+exports.convertFeastToDate = (str) => {
+  const [day, month] = str.split("/");
+  return new Date(`${month}/${day}`);
+};

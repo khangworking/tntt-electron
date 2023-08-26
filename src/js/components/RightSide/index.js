@@ -26,7 +26,10 @@ export default () => {
     });
   };
   const fetchFeasts = () => {
-    window.database.groupFeast().then((rs) => setGroups(rs));
+    window.database.groupFeast().then((rs) => {
+      setGroups(rs);
+      console.log(rs);
+    });
   };
   const title = (key) => (tab === "levels" ? groups[key][0].level.name : key);
   const itemKey = (key) =>
